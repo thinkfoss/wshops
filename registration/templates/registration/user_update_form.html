@@ -1,0 +1,69 @@
+{% extends "static/base.html" %}
+
+{% load staticfiles %}
+{% load register_extras %}
+{% block body %}
+<script>
+$(document).ready(function() {
+    $('#id_user_dob').datepicker({
+      changeYear: true,
+      changeMonth: true,
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      yearRange: "1940:2015"
+    });
+});
+</script>
+<div class="overlay" id="update_user">
+<div class="container container-top">
+  <div class="row">
+    <div class="col col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <p style="text-align:center; color:white; font-size:25px;">  Keep your profile updated</p>
+            </div>
+            <div class="panel-body">
+
+
+	<form class="form-horizontal" id="registerForm" method="POST"
+    enctype="multipart/form-data" action="{% url 'user_profile_update' %}">
+    <fieldset>
+        {% csrf_token %} {% load tz %}
+        {% for field in form.visible_fields %}
+        <div id="div_{{ field.html_name }}"
+            class="form-group{% if field.errors %} has-error{% endif%}">
+            <label class="col-sm-4 control-label" for="{{ field.id_for_label }}">
+                {{ field.label }}
+            </label>
+			<div class="col-md-6 cnt-inpt">
+				{{ field|addcss:"form-control" }}
+				<div class="text-muted pull-right">
+                    <small>{{ field.help_text }}</small>
+                </div> <!-- form-group -->
+                <span class="help-block">
+                    {% for error in field.errors %} {{error }} {% endfor %}
+                </span> <!-- help-block -->
+            </div> <!-- col-sm-4 -->
+
+		</div>
+		{% endfor %}
+        {% for hidden in user_form.hidden_fields %} {{ hidden }} {% endfor %}
+
+			<div class="form-group" style="text-align:center">
+								 <button type="submit" class="btn btn-success" >Update</button>
+				 </div> <!-- form-group -->
+		 </fieldset>
+	 </form>
+        </div>
+            <div class="panel-footer">
+                <p style="text-align:center">ThinkFOSS welcome you to update your profile to make it easy while validating reviews.</p>
+            </div>
+ </div>
+
+</div>
+ </div>
+</div>
+ </div>
+
+
+{% endblock body %}

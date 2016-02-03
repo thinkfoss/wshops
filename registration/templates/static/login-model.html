@@ -1,0 +1,62 @@
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+	<div class="modal-dialog" role="document"  style="width: 400px">
+    <div class="panel panel-default">
+            <div class="panel-heading">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="section-title" style="text-align: center">
+                    <h2><strong>Think<span style="color :orange">FOSS</span></strong></h2></div>
+            <p style="text-align: center"> < code | <strong>train</strong> | grow ></p>
+
+    </div>
+            <div class="panel-body">
+            <form  action = '{% url 'login' %}' method = 'post' style="padding: 10px 10px 0px 10px;" >
+							{% csrf_token %}
+                    <div class='form-group'>
+                            <label class='sr-only' for='username' > Email id </label >
+                            <div class='input-group' >
+                                    <div class='input-group-addon'><i class='fa fa-user'></i ></div >
+                                    <input type = 'text' class='form-control' id = 'username' name = 'username' placeholder = ' Email id'>
+                            </div> <br>
+                            <label class='sr-only' for='password'> Password</label >
+                            <div class='input-group'>
+                                    <div class='input-group-addon' ><i class='fa fa-lock' ></i ></div >
+                                    <input type = 'password' class='form-control' id = 'password' name = 'password' placeholder = ' Password'>
+																		<input type="hidden" name="next" value="{{ next }}" />
+                            </div>
+														<br>
+
+                            <button type="submit" class="btn-new btn-blue btn-block btn-lg" value="Sign in"  id="signinbutton" data-loading-text="Signing In...">Sign in <i class="fa fa-arrow-circle-right"></i></button>
+
+                    </div>
+            </form>
+						<div style="text-align:center">
+						<a href="{% url 'password_reset' %}" style="color:black"> Forgot Password ?</a>
+					</div>
+            </div>
+            <div class="panel-footer">
+    				<p style="text-align: center;">
+            <a href="{% url 'register_user' %}"style="color:#2980b9"><button class="btn-new btn-white btn-nav"> Sign Up</button></a>
+            or login using
+
+            <a href="/accounts/google/login"> <button type='button' class='btn tf-btn' style="background-color:red"><i class="fa fa-google-plus fa-2x"></i> </button></a>
+            <a href="/accounts/github/login"> <button type='button'  class='btn tf-btn' style="background-color:black"><i class="fa fa-github fa-2x"></i> </button></a>
+    </p>
+
+            </div>
+
+            </div>
+
+	          </div>
+
+		</div>
+		</div>
+</div>
+
+<script>
+  $('#signinbutton').on('click', function () {
+			$(this).button('loading').delay(1000).queue(function() {
+			$(this).button('reset');
+			$(this).dequeue();
+		});
+  });
+</script>

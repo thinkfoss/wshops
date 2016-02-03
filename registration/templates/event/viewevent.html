@@ -1,0 +1,75 @@
+{% extends "static/base_home.html" %}
+{% load staticfiles %}
+{% block body %}
+
+<div class="container" style="padding-top:8%">
+    <div class="well well-lg">
+        <div class="row">
+            <div class="col-sm-6 col-md-4" style="font-size: 70px; padding-left: 10%">
+          <span class="fa-stack fa-lg">
+          <i class="fa fa-circle  fa-stack-2x"></i>
+          <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
+        </span>
+            </div> <!-- col-sm-6 -->
+            <div class="col-sm-6 col-md-8">
+                        <p style="font-size: 35px;">{{ eventname }}</p>
+                <p>
+                    <i class="fa fa-map-marker"></i> {{ eventlocation }}
+                    <br />
+                    <i class="fa fa-clock-o"></i> {{ start_date }} to {{ end_date }}
+                    <br />
+                    <i class="fa fa-envelope"></i> <a href="mailto:admin@thinkfoss.com" target="_blank">admin@thinkfoss.com </a>
+                    <br />
+                    <i class="fa fa-book"></i> {{ eventdescription }}
+                    <br />
+                </p>
+            </div> <!-- col-md-6 -->
+        </div> <!-- row -->
+    </div> <!-- well -->
+    <h3 style="text-align:center"> Modules </h3>
+      <div style="padding-top:15px">
+              <div class="table-responsive">
+      						<table class="table table-bordered table-striped table-hover">
+                    <col width="auto">
+                    <col width="auto">
+                    <col width="50">
+                    <col width="100">
+                    <col width="100">
+                    <col width="100">
+      								{% if object_list %}
+      								<thead>
+      										<tr>
+      												<th>Module Name</th>
+      												<th>Module Description</th>
+                                                    <th>Day</th>
+      												<th>From</th>
+                                                    <th>To</th>
+                              <th>Action</th>
+      										</tr>
+      								</thead>
+      								<tbody>
+      								{% for module in object_list %}
+      								<tr>
+      										<td> {{ module.name }} </td>
+      										<td> {{ module.description }} </td>
+                                            <td> {{ module.module_day }} </td>
+                                            <td> {{ module.start_time }} </td>
+                                            <td> {{ module.end_time }} </td>
+      										<td style="width: 140px"> <a href ="{% url 'review_module' module.id %}"><i class="fa fa-pencil fa-pull-left"> Review</i></a>
+      										</td>
+      								</tr>
+      								</tbody>
+      								{% endfor %}
+      								{% else %}
+      								<div class="alert alert-danger" style="text-align: center">
+      									 You havent added any modules for this course yet
+      								</div>
+
+      								{% endif%}
+      						</table>
+      				</div><!--table-responsive-->
+
+            </div>
+</div>
+<!--//contact-->
+{% endblock body %}

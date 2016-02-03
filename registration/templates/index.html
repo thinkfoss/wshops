@@ -1,0 +1,44 @@
+{% extends "static/base_home.html" %}
+{% load staticfiles %}
+{% block body %}
+
+<script type="text/javascript">
+function showDiv() {
+  document.getElementById("contact_form").style.display='block';
+  document.getElementById("contact_button").style.display='none';
+  document.getElementById("contact_button_div").style.display='none';
+}
+</script>
+<!-- Home Page
+
+==========================================-->
+<div class="text-center">
+    <div style="padding-top: 5%;">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div id="imaginary_container">
+                <p style="font-size: 20px;"><span style="font-weight:bolder; font-size:40px;">Type</span> in a workshop name to join in..</p>
+                <form action="{% url 'event_search' %}" method="get" class="form-inline" >
+                    <div class="form-group">
+                        <div class="input-group stylish-input-group">
+                            <input type="text" class="form-control" required placeholder="Search" name="search" list="events"  id="searchform">
+                            <div class="input-group-addon" >
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                        <datalist id="events">
+                            {% for event in object_list %}
+                            <option value="{{ event.name }}">
+                                {% endfor %}
+                        </datalist>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Services Section
+==========================================-->
+
+{% include 'static/login-model.html' %}
+{% endblock body %}

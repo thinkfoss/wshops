@@ -1,0 +1,60 @@
+{% load staticfiles %}
+<nav id="tf-menu" class="navbar navbar-default navbar-fixed-top navbar-transparent">
+<div class="container" >
+        <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"  style="padding-top:5px; padding-bottom:5px;">
+                <span style="font-size:35px; color:white">workshops</span>
+                <br><span style="font-size: 24px; color:white; ">ThinkFOSS <i class="fa fa-beer"></i></span>
+                </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+          <ul class="nav navbar-nav navbar-right" id="home_nav">
+                {% if user.is_anonymous %}
+                    <li><button type="button" data-toggle="modal" data-target="#login-modal" class="btn-new btn-ghost btn-nav" >Login </button></li>
+                    <li><a href="{% url 'register_user' %}" class="btn-new btn-nav btn-white" id="signup_btn" style="padding: 5px; display:table;">Sign Up</a></li>
+                  {% else %}
+                    <li>
+                    <div class="btn-group">
+                      <a class="btn-new btn-nav btn-white" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i>
+                        {% if request.user.user_first_name %}
+                          {{ request.user.user_first_name }}
+                          {% elif request.user.username %}
+                          {{ request.user.username }}
+                          {% else %}
+                          {{ request.user.email }}
+                        {% endif %}
+                          <span class="fa fa-caret-down"></span>
+                        </a>
+ <ul class="dropdown-menu">
+                            <li class="{% if request.resolver_match.url_name == 'user_profile' %}active{% endif %}">
+                            <a href="{% url 'user_profile' %}">
+                                <i class='fa fa-user fa-fw' style='color:#F14700'></i> My Profile </a>
+                            </li>
+                          <li class="{% if request.resolver_match.url_name == 'password_change' %}active{% endif %}">
+                          <a href="{% url 'password_change' %}">
+                              <i class='fa fa-lock fa-fw' style='color:#F14700'></i> Change Password </a>
+                          </li>
+                            <li class="divider"></li>
+                          <li>
+                          <a href="{% url 'logout' %}">
+                                  <i class='fa fa-power-off fa-fw' style='color:red'></i> Logout
+                              </a>
+                          </li>
+                          </ul>
+                </div>
+              </li>
+                  {% endif %}
+                        </ul>
+                </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+</nav>

@@ -1,0 +1,45 @@
+{% extends "static/base_home.html" %}
+{% load staticfiles %}
+{% block body %}
+
+<div class="container" style="padding-top:10%">
+    <h2 style="text-align:center">{{ user.user_first_name }} {{ user.user_last_name }} </h2>
+    <br>
+    <div class="well well-lg">
+        <div class="row">
+            <div class="col-sm-6 col-md-4" style="font-size: 70px; padding-left: 10%">
+          <span class="fa-stack fa-lg">
+          <i class="fa fa-circle  fa-stack-2x"></i>
+          <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+        </span>
+            </div> <!-- col-sm-6 -->
+            <div class="col-sm-6 col-md-8">
+                <h3>
+                    {{ user.email }} </h3>
+                <p>
+                    <i class="fa fa-male"></i>
+                     {% if user.user_gender = 'M' %}
+                     Male
+                     {% else %}
+                     Female
+                     {% endif %}
+                    <br />
+                    <i class="fa fa-envelope"></i> <a href="{{ user.email }}" target="_blank">{{ user.email }} </a>
+                    <br />
+                    <i class="fa fa-github"></i> {{ user.user_github }}
+                    <br />
+                    <i class="fa fa-linkedin"></i> {{ user.user_linkedin }}
+                    <br />
+                    <i class="fa fa-book"></i> {{ user.user_bio }}
+                    <br />
+                </p>
+            </div> <!-- col-md-6 -->
+        </div> <!-- row -->
+    </div> <!-- well -->
+<p style="text-align:center">
+<a href="{% url 'user_profile_update'  %}" class="btn btn-primary" role="button"><i class="fa fa-pencil"> Update Profile </i></a>
+    <a href="{% url 'password_change'  %}" class="btn btn-success" role="button"><i class="fa fa-lock"> Change Password </i></a>
+    </p>
+</div>
+<!--//contact-->
+{% endblock body %}
