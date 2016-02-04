@@ -10,7 +10,7 @@ sudo pip install virtualenvwrapper
 ## Get the files
 You can clone it directly from [https://github.com/thinkfoss/wshops.git](https://github.com/thinkfoss/wshops.git)
 ```bash
-git clone git@github.com:thinkfoss/wshops.git
+git clone https://github.com/thinkfoss/wshops.git
 ```
 ## Setup development environment
 First, some initialization steps. Most of this only needs to be done 
